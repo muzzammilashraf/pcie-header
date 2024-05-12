@@ -1,0 +1,6 @@
+*.a
+*.o
+*.so
+*.exe
+*.[0-9]
+pcie-header
