@@ -4,16 +4,16 @@
 #include <pci.h>
 
 typedef struct __attribute__((packed)) {
-	uint16_t vendor_id;
-	uint16_t device_id;
-	uint16_t command;
-	uint16_t status;
-	uint8_t rev_id;
-	uint32_t class_code:24;
-	uint8_t cache_line_size;
-	uint8_t latency_timer;
-	uint8_t header_type;
-	uint8_t bist;
+	uint32_t vendor_id:16,
+			 device_id:16;
+	uint32_t command:16,
+			 status:16;
+	uint32_t rev_id:8,
+			 class_code:24;
+	uint32_t cache_line_size:8,
+	 		 latency_timer:8,
+	 		 header_type:8,
+	 		 bist:8;
 	uint32_t bar_0;
 	uint32_t bar_1;
 	union {
@@ -80,8 +80,21 @@ int main(int argc, char *argv[])
 	pacc = pci_alloc();
 	pci_init(pacc);
 	pci_scan_bus(pacc);
-	pci_dev = search_device(pacc, atoi(argv[1]), atoi(argv[2]), atoi(argv[3]));
-	
+
+	if(argc < 4) {
+		printf("Error: device bus:device:function (bdf) number missing\n");
+		return -1;
+	}
+
+	pci_dev = search_device(pacc, strtol(argv[1], NULL, 16),
+							strtol(argv[2], NULL, 16),
+							strtol(argv[3], NULL, 16));
+	if(pci_dev == NULL) {
+		printf("Error: could not find device with the id: %s:%s.%s\n", argv[1],
+				argv[2], argv[3]);
+		return -1;
+	}
+
 	pci_read_block(pci_dev, 0, config, 64);
 	hdr_t *hdr = (hdr_t *) config;
     printf("\t|-----------------------------------------------------------|\n");
