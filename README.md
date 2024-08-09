@@ -12,7 +12,7 @@ git submodule update --init --recursive
 make all
 ```
 
-# Execute Instruction
+## Execute Instruction
 ```
 ./pcie-header <bus_number> <device_number> <function_number>
 ```
