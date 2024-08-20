@@ -1,4 +1,4 @@
-# Dump PCIE Config Space Header
+# Print the PCIE Config Space Header
 
 ![Build Status](https://img.shields.io/badge/build-yes-brightgreen)
 [![GPL Licensed](https://img.shields.io/badge/license-GPL-blue)](LICENSE)
@@ -6,7 +6,7 @@
 
 ## Build Instructions
 ```
-https://github.com/muzzammilashraf/pcie-header.git
+git clone https://github.com/muzzammilashraf/pcie-header.git
 cd pcie-header
 git submodule update --init --recursive
 make all
