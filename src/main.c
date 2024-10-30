@@ -115,7 +115,6 @@ int main(int argc, char *argv[])
         printf("\t|                   %06x                   |     %02x       |\n",
             GET_VALUE(TYPE_1, 13, RSVD),
             GET_VALUE(TYPE_1, 13, CAPABILITIES_POINTER));
-		printf("dw13: %x\n", config[13]);
         printf("\t|-----------------------------------------------------------|\n");
         printf("\t|          Expansion ROM Base Address =  %08x           |    0x38\n",
             GET_VALUE(TYPE_1, 14, EXPANSION_ROM_BASE_ADDRESS));
